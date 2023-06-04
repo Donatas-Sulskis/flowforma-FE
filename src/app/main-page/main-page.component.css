@@ -1,0 +1,19 @@
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px 30px;
+}
+
+.divider {
+  margin: 0 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+app-card {
+  padding: 0 37.5px 30px 37.5px;
+}

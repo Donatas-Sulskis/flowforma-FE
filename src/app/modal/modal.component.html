@@ -1,0 +1,97 @@
+<h1 mat-dialog-title>Product information</h1>
+<div mat-dialog-content>
+  <form *ngIf="!(isProductType | async)" [formGroup]="productForm">
+    <div>
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Image URL</mat-label>
+          <input matInput formControlName="imageUrl" placeholder="https://" />
+          <mat-error *ngIf="productForm.get('imageUrl')?.hasError('required')">
+            Image URL is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="productForm.get('imageUrl')?.hasError('pattern')">
+            Please enter valid URL
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Types</mat-label>
+          <select
+            matNativeControl
+            required
+            (change)="selectOption($event.target?.value)"
+          >
+            <option [disabled]="true" [value]="">
+              {{
+                (allProductTypes | async)?.length
+                  ? "Select product type"
+                  : "First add type"
+              }}
+            </option>
+            <ng-container>
+              <option
+                *ngFor="let productType of allProductTypes | async"
+                [value]="
+                  selectedType(
+                    productType.id,
+                    this.selectedProductType.value?.id
+                  )
+                "
+                [selected]="
+                  this.selectedProductType.value?.id === productType.id
+                "
+              >
+                {{
+                  selectedType(
+                    productType.name,
+                    this.selectedProductType.value?.name
+                  )
+                }}
+              </option>
+            </ng-container>
+          </select>
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label>Details</mat-label>
+        <textarea
+          matInput
+          #input
+          maxlength="200"
+          formControlName="details"
+          [rows]="5"
+        ></textarea>
+        <mat-error *ngIf="productForm.get('details')?.hasError('required')">
+          Details is <strong>required</strong>
+        </mat-error>
+        <mat-hint align="end">{{ input.value.length }}/200</mat-hint>
+      </mat-form-field>
+    </div>
+  </form>
+  <form *ngIf="isProductType | async" [formGroup]="productTypeForm">
+    <mat-form-field class="product-type">
+      <mat-label>Product Type Name</mat-label>
+      <input
+        matInput
+        #input
+        maxlength="10"
+        formControlName="name"
+        placeholder="Cars"
+      />
+      <mat-hint align="end">{{ input.value.length }}/10</mat-hint>
+      <mat-error *ngIf="productTypeForm.get('name')?.hasError('required')">
+        Product type name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions class="options">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button
+      mat-raised-button
+      (click)="handleSubmit()"
+      color="primary"
+      cdkFocusInitial
+    >
+      Submit
+    </button>
+  </div>
+</div>

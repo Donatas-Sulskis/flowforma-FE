@@ -1,0 +1,24 @@
+.product-type {
+  width: 500px;
+}
+
+mat-form-field {
+  padding: 5px 10px;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}

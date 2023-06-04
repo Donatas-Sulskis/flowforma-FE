@@ -1,0 +1,22 @@
+<app-header />
+<div class="button-container">
+  <button mat-raised-button color="primary" (click)="openDialog(true)">
+    Add product type
+  </button>
+  <div class="divider"> </div>
+  <button mat-raised-button color="primary" (click)="openDialog(false)">
+    Add product
+  </button>
+</div>
+
+<div class="container">
+  <app-card
+    *ngFor="let product of allProducts | async"
+    [productDetails]="product.details"
+    [productImageUrl]="product.imageUrl"
+    [productId]="product.id"
+    [productType]="product.productType ?? ''"
+    (deleteProduct)="handleDeleteProduct($event)"
+    (updateProduct)="handleUpdateProduct($event)"
+  ></app-card>
+</div>

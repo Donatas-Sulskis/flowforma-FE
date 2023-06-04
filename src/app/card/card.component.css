@@ -1,0 +1,21 @@
+.card {
+  max-width: 400px;
+  max-height: 500px;
+}
+
+img {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+}
+
+mat-card-content {
+  overflow: hidden;
+}
+
+p {
+  word-break: break-all;
+  padding: 15px;
+  font-size: 15px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
